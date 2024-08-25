@@ -4,6 +4,7 @@ import { icons, images } from "@/constants";
 import InputField from "@/components/InputField";
 import CustomButton from "@/components/CustomButton";
 import { Link } from "expo-router";
+import OAuth from "@/components/OAuth";
 
 const SignUp = () => {
   const [form, setForm] = useState({
@@ -58,7 +59,7 @@ const SignUp = () => {
             onPress={onSignUpPress}
           />
 
-          {/* OAUTH */}
+          <OAuth />
 
           <Link
             href="/sign-in"
