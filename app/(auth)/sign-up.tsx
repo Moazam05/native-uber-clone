@@ -18,17 +18,24 @@ const SignUp = () => {
     email: "",
     password: "",
   });
+
   const [verification, setVerification] = useState({
     state: "default",
     code: "",
     error: "",
   });
+
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [isSignUpLoading, setIsSignUpLoading] = useState(false);
+  const [isVerifyLoading, setIsVerifyLoading] = useState(false);
+
+  const [isVerificationModalVisible, setIsVerificationModalVisible] =
+    useState(false);
 
   const onSignUpPress = async () => {
-    if (!isLoaded) {
-      return;
-    }
+    if (!isLoaded) return;
+
+    setIsSignUpLoading(true);
 
     try {
       await signUp.create({
@@ -39,13 +46,18 @@ const SignUp = () => {
       await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
 
       setVerification({ ...verification, state: "pending" });
+      setIsVerificationModalVisible(true);
     } catch (err: any) {
       Alert.alert("Error", err.errors[0].longMessage);
+    } finally {
+      setIsSignUpLoading(false);
     }
   };
 
   const onPressVerify = async () => {
     if (!isLoaded) return;
+
+    setIsVerifyLoading(true);
 
     try {
       const completeSignUp = await signUp.attemptEmailAddressVerification({
@@ -53,9 +65,7 @@ const SignUp = () => {
       });
 
       if (completeSignUp.status === "complete") {
-        // TODO: Create a database user!
         await setActive({ session: completeSignUp.createdSessionId });
-
         setVerification({ ...verification, state: "success" });
       } else {
         setVerification({
@@ -70,6 +80,8 @@ const SignUp = () => {
         error: err.errors[0].longMessage,
         state: "failed",
       });
+    } finally {
+      setIsVerifyLoading(false);
     }
   };
 
@@ -113,6 +125,7 @@ const SignUp = () => {
             title="Sign Up"
             className="mt-6"
             onPress={onSignUpPress}
+            loading={isSignUpLoading}
           />
 
           <OAuth />
@@ -126,9 +139,9 @@ const SignUp = () => {
           </Link>
         </View>
 
-        {/* Verification Model Pending */}
+        {/* Verification Modal */}
         <Modal
-          isVisible={verification.state === "pending"}
+          isVisible={isVerificationModalVisible}
           onModalHide={() => {
             if (verification.state === "success") setShowSuccessModal(true);
           }}
@@ -163,11 +176,12 @@ const SignUp = () => {
               title="Verify Email"
               onPress={onPressVerify}
               className="mt-5 bg-success-500"
+              loading={isVerifyLoading}
             />
           </View>
         </Modal>
 
-        {/* Verification Model Success */}
+        {/* Success Modal */}
         <Modal isVisible={showSuccessModal}>
           <View className="bg-white px-7 py-9 rounded-2xl min-h-[300px]">
             <Image
