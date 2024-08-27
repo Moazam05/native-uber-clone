@@ -1,4 +1,4 @@
-import { Image, ScrollView, Text, View } from "react-native";
+import { Alert, Image, ScrollView, Text, View } from "react-native";
 import React, { useState } from "react";
 import { icons, images } from "@/constants";
 import InputField from "@/components/InputField";
@@ -23,6 +23,7 @@ const SignUp = () => {
     code: "",
     error: "",
   });
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const onSignUpPress = async () => {
     if (!isLoaded) {
@@ -39,9 +40,7 @@ const SignUp = () => {
 
       setVerification({ ...verification, state: "pending" });
     } catch (err: any) {
-      // See https://clerk.com/docs/custom-flows/error-handling
-      // for more info on error handling
-      console.error(JSON.stringify(err, null, 2));
+      Alert.alert("Error", err.errors[0].longMessage);
     }
   };
 
@@ -131,7 +130,7 @@ const SignUp = () => {
         <Modal
           isVisible={verification.state === "pending"}
           onModalHide={() => {
-            setVerification({ ...verification, state: "success" });
+            if (verification.state === "success") setShowSuccessModal(true);
           }}
         >
           <View className="bg-white px-7 py-9 rounded-2xl min-h-[300px]">
@@ -169,7 +168,7 @@ const SignUp = () => {
         </Modal>
 
         {/* Verification Model Success */}
-        <Modal isVisible={verification.state === "success"}>
+        <Modal isVisible={showSuccessModal}>
           <View className="bg-white px-7 py-9 rounded-2xl min-h-[300px]">
             <Image
               source={images.check}
@@ -187,7 +186,10 @@ const SignUp = () => {
             <CustomButton
               title="Browse Home"
               className="mt-5"
-              onPress={() => router.replace("/(root)/(tabs)/home")}
+              onPress={() => {
+                setShowSuccessModal(false);
+                router.push("/(root)/(tabs)/home");
+              }}
             />
           </View>
         </Modal>
