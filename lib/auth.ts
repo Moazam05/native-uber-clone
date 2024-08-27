@@ -1,6 +1,4 @@
 import * as SecureStore from "expo-secure-store";
-import { ClerkProvider, ClerkLoaded } from "@clerk/clerk-expo";
-import { Slot } from "expo-router";
 
 export const tokenCache = {
   async getToken(key: string) {
