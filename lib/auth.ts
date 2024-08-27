@@ -19,7 +19,8 @@ export const tokenCache = {
   async saveToken(key: string, value: string) {
     try {
       return SecureStore.setItemAsync(key, value);
-    } catch (err) {
+    } catch (err: any) {
+      console.error("SecureStore set item error: ", err);
       return;
     }
   },
