@@ -1,20 +1,49 @@
-import { Image, ScrollView, Text, View } from "react-native";
-import React, { useState } from "react";
+import { Alert, Image, ScrollView, Text, View } from "react-native";
+import React, { useCallback, useState } from "react";
 import { icons, images } from "@/constants";
 import InputField from "@/components/InputField";
 import CustomButton from "@/components/CustomButton";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import OAuth from "@/components/OAuth";
+import { useSignIn } from "@clerk/clerk-expo";
 
 const SignIn = () => {
+  const { signIn, setActive, isLoaded } = useSignIn();
+  const router = useRouter();
+
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
 
-  const onSignInPress = async () => {
-    console.log(form);
-  };
+  const [loading, setLoading] = useState(false);
+
+  const onSignInPress = useCallback(async () => {
+    if (!isLoaded || loading) {
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const signInAttempt = await signIn.create({
+        identifier: form.email,
+        password: form.password,
+      });
+
+      if (signInAttempt.status === "complete") {
+        await setActive({ session: signInAttempt.createdSessionId });
+        router.replace("/");
+      } else {
+        Alert.alert("Error", "Invalid email or password");
+      }
+    } catch (err: any) {
+      Alert.alert("Error", err.errors[0].longMessage);
+    } finally {
+      setLoading(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoaded, form.email, form.password]);
 
   return (
     <ScrollView className="flex-1 bg-white">
@@ -48,6 +77,7 @@ const SignIn = () => {
             title="Sign In"
             className="mt-6"
             onPress={onSignInPress}
+            loading={loading}
           />
 
           <OAuth />
@@ -60,8 +90,6 @@ const SignIn = () => {
             <Text className="text-primary-500">Sign Up</Text>
           </Link>
         </View>
-
-        {/* Verification Model */}
       </View>
     </ScrollView>
   );
