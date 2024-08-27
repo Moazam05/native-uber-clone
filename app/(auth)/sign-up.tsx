@@ -25,12 +25,12 @@ const SignUp = () => {
     error: "",
   });
 
-  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  // Loading
   const [isSignUpLoading, setIsSignUpLoading] = useState(false);
   const [isVerifyLoading, setIsVerifyLoading] = useState(false);
-
-  const [isVerificationModalVisible, setIsVerificationModalVisible] =
-    useState(false);
+  // Modals
+  const [successModal, setSuccessModal] = useState(false);
+  const [verificationModal, setVerificationModal] = useState(false);
 
   const onSignUpPress = async () => {
     if (!isLoaded) return;
@@ -46,8 +46,8 @@ const SignUp = () => {
       await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
 
       setVerification({ ...verification, state: "pending" });
-      setIsVerificationModalVisible(true);
-    } catch (err: any) {
+      setVerificationModal(true);
+    } catch (err) {
       Alert.alert("Error", err.errors[0].longMessage);
     } finally {
       setIsSignUpLoading(false);
@@ -64,9 +64,13 @@ const SignUp = () => {
         code: verification.code,
       });
 
+      console.log("completeSignUp", completeSignUp);
+
       if (completeSignUp.status === "complete") {
         await setActive({ session: completeSignUp.createdSessionId });
         setVerification({ ...verification, state: "success" });
+        setVerificationModal(false);
+        setSuccessModal(true);
       } else {
         setVerification({
           ...verification,
@@ -74,7 +78,7 @@ const SignUp = () => {
           state: "failed",
         });
       }
-    } catch (err: any) {
+    } catch (err) {
       setVerification({
         ...verification,
         error: err.errors[0].longMessage,
@@ -140,12 +144,7 @@ const SignUp = () => {
         </View>
 
         {/* Verification Modal */}
-        <Modal
-          isVisible={isVerificationModalVisible}
-          onModalHide={() => {
-            if (verification.state === "success") setShowSuccessModal(true);
-          }}
-        >
+        <Modal isVisible={verificationModal}>
           <View className="bg-white px-7 py-9 rounded-2xl min-h-[300px]">
             <Text className="text-2xl font-JakartaExtraBold mb-2">
               Verification
@@ -182,7 +181,7 @@ const SignUp = () => {
         </Modal>
 
         {/* Success Modal */}
-        <Modal isVisible={showSuccessModal}>
+        <Modal isVisible={successModal}>
           <View className="bg-white px-7 py-9 rounded-2xl min-h-[300px]">
             <Image
               source={images.check}
@@ -201,7 +200,7 @@ const SignUp = () => {
               title="Browse Home"
               className="mt-5"
               onPress={() => {
-                setShowSuccessModal(false);
+                setSuccessModal(false);
                 router.push("/(root)/(tabs)/home");
               }}
             />
