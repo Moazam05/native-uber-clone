@@ -12,6 +12,8 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import GoogleTextInput from "@/components/GoogleTextInput";
+import Map from "@/components/Map";
 
 const recentRides = [
   {
@@ -127,6 +129,8 @@ export default function Page() {
 
   const handleSignOut = async () => {};
 
+  const handleDestinationPress = () => {};
+
   return (
     <SafeAreaView className="bg-general-500">
       <FlatList
@@ -155,7 +159,6 @@ export default function Page() {
         ListHeaderComponent={() => (
           <>
             <View className="flex flex-row items-center justify-between my-5">
-              {/* text-xl bottom */}
               <Text className="text-sm capitalize font-JakartaExtraBold">
                 Welcome{", "}
                 {user?.firstName ||
@@ -170,6 +173,26 @@ export default function Page() {
                 <Image source={icons.out} className="w-4 h-4" />
               </TouchableOpacity>
             </View>
+
+            <GoogleTextInput
+              icon={icons.search}
+              containerStyle="bg-white shadow-md shadow-neutral-300"
+              handlePress={handleDestinationPress}
+            />
+
+            <>
+              <Text className="text-xl font-JakartaBold mt-5 mb-3">
+                Your Current Location
+              </Text>
+
+              <View className="flex flex-row items-center bg-transparent h-[300px]">
+                <Map />
+              </View>
+
+              <Text className="text-xl font-JakartaBold mt-5 mb-3">
+                Recent Rides
+              </Text>
+            </>
           </>
         )}
       />
