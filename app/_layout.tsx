@@ -1,13 +1,12 @@
 import { useFonts } from "expo-font";
 import { SplashScreen, Stack } from "expo-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "react-native-reanimated";
 import { ClerkProvider, ClerkLoaded } from "@clerk/clerk-expo";
 import { tokenCache } from "@/lib/auth";
 
-SplashScreen.preventAutoHideAsync();
-
 export default function RootLayout() {
+  const [appIsReady, setAppIsReady] = useState(false);
   const [fontsLoaded, error] = useFonts({
     "Jakarta-Bold": require("../assets/fonts/PlusJakartaSans-Bold.ttf"),
     "Jakarta-ExtraBold": require("../assets/fonts/PlusJakartaSans-ExtraBold.ttf"),
@@ -19,12 +18,24 @@ export default function RootLayout() {
   });
 
   useEffect(() => {
-    if (error) throw error;
+    async function prepare() {
+      try {
+        if (error) throw error;
+        if (fontsLoaded) {
+          await SplashScreen.hideAsync();
+          setAppIsReady(true);
+        }
+      } catch (e) {
+        console.warn(e);
+      }
+    }
 
-    if (fontsLoaded) SplashScreen.hideAsync();
+    prepare();
   }, [fontsLoaded, error]);
 
-  if (!fontsLoaded && !error) return null;
+  if (!appIsReady) {
+    return null; // Render nothing until the fonts are loaded and the app is ready
+  }
 
   const publishableKey =
     process.env.NODE_ENV === "production"
@@ -33,7 +44,6 @@ export default function RootLayout() {
 
   if (!publishableKey) {
     throw new Error(
-      // eslint-disable-next-line prettier/prettier
       `Missing Publishable Key. Please set the correct Clerk Publishable Key in your environment variables.`
     );
   }
