@@ -1,7 +1,16 @@
 import RideCard from "@/components/RideCard";
+import { icons, images } from "@/constants";
 import { SignedIn, SignedOut, useUser } from "@clerk/clerk-expo";
 import { Link } from "expo-router";
-import { FlatList, Text } from "react-native";
+import {
+  ActivityIndicator,
+  FlatList,
+  Image,
+  Platform,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const recentRides = [
@@ -114,11 +123,55 @@ const recentRides = [
 export default function Page() {
   const { user } = useUser();
 
+  const loading = true;
+
+  const handleSignOut = async () => {};
+
   return (
     <SafeAreaView className="bg-general-500">
       <FlatList
         data={recentRides}
         renderItem={({ item }) => <RideCard ride={item} />}
+        className="px-5"
+        keyboardShouldPersistTaps="handled"
+        contentContainerStyle={{ paddingBottom: 100 }}
+        ListEmptyComponent={() => (
+          <View className="flex flex-col items-center justify-center">
+            {loading ? (
+              <ActivityIndicator size="small" color="#000" />
+            ) : (
+              <>
+                <Image
+                  source={images.noResult}
+                  className="w-40 h-40"
+                  resizeMode="contain"
+                  alt="No recent rides found"
+                />
+                <Text className="text-sm">No recent rides found</Text>
+              </>
+            )}
+          </View>
+        )}
+        ListHeaderComponent={() => (
+          <>
+            <View className="flex flex-row items-center justify-between my-5">
+              {/* text-xl bottom */}
+              <Text className="text-sm capitalize font-JakartaExtraBold">
+                Welcome{", "}
+                {user?.firstName ||
+                  user?.emailAddresses[0].emailAddress.split("@")[0]}{" "}
+                👋
+              </Text>
+
+              <TouchableOpacity
+                onPress={handleSignOut}
+                className="justify-center items-center w-10 h-10 rounded-full bg-white"
+              >
+                <Image source={icons.out} className="w-4 h-4" />
+              </TouchableOpacity>
+            </View>
+          </>
+        )}
       />
     </SafeAreaView>
   );
