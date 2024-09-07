@@ -3,7 +3,7 @@ import React, { useRef } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { icons } from "@/constants";
 import Map from "./Map";
-import BottomSheet, { BottomSheetScrollView } from "@gorhom/bottom-sheet";
+import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 
 const RideLayout = ({
   title,
@@ -37,15 +37,15 @@ const RideLayout = ({
         </View>
 
         {/* Bottom sheet */}
-        <BottomSheet ref={bottomSheetRef} snapPoints={["40%, 85%"]} index={0}>
-          <BottomSheetScrollView
+        <BottomSheet ref={bottomSheetRef} snapPoints={["40%", "75%"]} index={0}>
+          <BottomSheetView
             style={{
               flex: 1,
               padding: 20,
             }}
           >
             {children}
-          </BottomSheetScrollView>
+          </BottomSheetView>
         </BottomSheet>
       </View>
     </GestureHandlerRootView>
