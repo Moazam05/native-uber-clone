@@ -13,7 +13,7 @@ import {
 import { useDriverStore, useUserLocationStore } from "@/store";
 import { Driver, MarkerData } from "@/types/type";
 
-const directionsAPI = process.env.EXPO_PUBLIC_DIRECTIONS_API_KEY;
+const directionsAPI = process.env.EXPO_PUBLIC_PLACES_API_KEY;
 
 const Map = () => {
   const {
@@ -42,7 +42,11 @@ const Map = () => {
   }, [drivers, userLatitude, userLongitude]);
 
   useEffect(() => {
-    if (markers.length > 0 && destinationLatitude && destinationLongitude) {
+    if (
+      markers.length > 0 &&
+      destinationLatitude !== undefined &&
+      destinationLongitude !== undefined
+    ) {
       calculateDriverTimes({
         markers,
         userLatitude,
@@ -100,6 +104,33 @@ const Map = () => {
           }
         />
       ))}
+
+      {destinationLatitude && destinationLongitude && (
+        <>
+          <Marker
+            key="destination"
+            coordinate={{
+              latitude: destinationLatitude,
+              longitude: destinationLongitude,
+            }}
+            title="Destination"
+            image={icons.pin}
+          />
+          <MapViewDirections
+            origin={{
+              latitude: userLatitude!,
+              longitude: userLongitude!,
+            }}
+            destination={{
+              latitude: destinationLatitude,
+              longitude: destinationLongitude,
+            }}
+            apikey={directionsAPI!}
+            strokeColor="#0286FF"
+            strokeWidth={2}
+          />
+        </>
+      )}
     </MapView>
   );
 };
