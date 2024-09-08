@@ -1,9 +1,16 @@
-import { Image, Text, TouchableOpacity, View } from "react-native";
+// React Import
 import React, { useRef, useState } from "react";
+// React Native
+import { Image, Text, TouchableOpacity, View } from "react-native";
+// Native Safe Area
 import { SafeAreaView } from "react-native-safe-area-context";
+// Expo Router
 import { router } from "expo-router";
+// Native Swiper
 import Swiper from "react-native-swiper";
+// Constants
 import { onboarding } from "@/constants";
+// Custom Components
 import CustomButton from "@/components/CustomButton";
 
 const Welcome = () => {

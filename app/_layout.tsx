@@ -1,11 +1,18 @@
-import { ClerkLoaded, ClerkProvider } from "@clerk/clerk-expo";
-import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
-import * as SplashScreen from "expo-splash-screen";
+// React Import
 import { useEffect } from "react";
+// Clerk for Authentication
+import { ClerkLoaded, ClerkProvider } from "@clerk/clerk-expo";
+// Expo Font
+import { useFonts } from "expo-font";
+// Expo Router
+import { Stack } from "expo-router";
+// Expo Splash Screen
+import * as SplashScreen from "expo-splash-screen";
+// React Native Reanimated
 import "react-native-reanimated";
+// React Native
 import { LogBox } from "react-native";
-
+// Custom
 import { tokenCache } from "@/lib/auth";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.

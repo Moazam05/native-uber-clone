@@ -1,5 +1,7 @@
-import { View, Text } from "react-native";
+// React Import
 import React from "react";
+// React Native
+import { View, Text } from "react-native";
 
 const NotFoundScreen = () => {
   return (

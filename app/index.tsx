@@ -1,5 +1,8 @@
+// React Import
 import React from "react";
+// Expo Router
 import { Redirect } from "expo-router";
+// Clerk for Authentication
 import { useAuth } from "@clerk/clerk-expo";
 
 const Home = () => {
