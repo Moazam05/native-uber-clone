@@ -1,5 +1,5 @@
 // React Native
-import { Image, Platform, Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
 // Clerk for Authentication
 import { useUser } from "@clerk/clerk-expo";
 // Stripe
@@ -13,6 +13,7 @@ import { formatTime } from "@/lib/utils";
 import { icons } from "@/constants";
 // Store
 import { useDriverStore, useUserLocationStore } from "@/store";
+import { ScrollView } from "react-native-gesture-handler";
 
 const BookRide = () => {
   const { user } = useUser();
@@ -30,11 +31,8 @@ const BookRide = () => {
       merchantIdentifier="merchant.uber.com"
       urlScheme="myapp"
     >
-      <RideLayout
-        title="Book Ride"
-        snapPoints={Platform.OS === "ios" ? ["85%", "50%"] : ["100%", "50%"]}
-      >
-        <>
+      <RideLayout title="Book Ride" snapPoints={["75%"]}>
+        <ScrollView>
           <Text className="text-xl font-JakartaSemiBold mb-3">
             Ride Information
           </Text>
@@ -109,7 +107,7 @@ const BookRide = () => {
             driverId={driverDetails?.id}
             rideTime={driverDetails?.time!}
           />
-        </>
+        </ScrollView>
       </RideLayout>
     </StripeProvider>
   );
