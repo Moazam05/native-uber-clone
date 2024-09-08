@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "uber",
+    "name": "Uber",
     "slug": "uber",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -13,15 +13,13 @@
       "backgroundColor": "#2F80ED"
     },
     "ios": {
-      "supportsTablet": true,
-      "jsEngine": "hermes"
+      "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "jsEngine": "hermes",
       "package": "com.moazam05.uber"
     },
     "web": {
