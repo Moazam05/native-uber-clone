@@ -1,9 +1,16 @@
-import { View, Text, Image } from "react-native";
+// React Import
 import React, { useCallback } from "react";
+// React Native
+import { View, Text, Image } from "react-native";
+// Custom
 import CustomButton from "./CustomButton";
+// Constants
 import { icons } from "@/constants";
+// Clerk for Authentication
 import { useOAuth } from "@clerk/clerk-expo";
+// OAuth
 import { googleOAuth } from "@/lib/auth";
+// Expo Router
 import { router } from "expo-router";
 
 const OAuth = () => {

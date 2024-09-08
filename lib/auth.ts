@@ -1,6 +1,9 @@
-import * as SecureStore from "expo-secure-store";
-import * as Linking from "expo-linking";
+// API
 import { fetchAPI } from "./fetch";
+// Expo Secure Store
+import * as SecureStore from "expo-secure-store";
+// Expo Linking
+import * as Linking from "expo-linking";
 
 export const tokenCache = {
   async getToken(key: string) {

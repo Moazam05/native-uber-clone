@@ -1,10 +1,17 @@
-import { View, Text, TouchableOpacity, Image } from "react-native";
+// React Import
 import React, { useRef } from "react";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { icons } from "@/constants";
-import Map from "./Map";
-import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
+// React Native
+import { View, Text, TouchableOpacity, Image } from "react-native";
+// Expo Router
 import { router } from "expo-router";
+// Gesture Handler
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+// Constants
+import { icons } from "@/constants";
+// Custom Components
+import Map from "./Map";
+// Bottom Sheet NPM
+import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 
 const RideLayout = ({
   title,

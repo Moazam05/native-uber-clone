@@ -1,3 +1,4 @@
+// Types Import
 import { Ride } from "@/types/type";
 
 export const sortRides = (rides: Ride[]): Ride[] => {

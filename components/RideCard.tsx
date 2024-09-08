@@ -1,7 +1,12 @@
-import { View, Text, Image } from "react-native";
+// React Import
 import React from "react";
+// React Native
+import { View, Text, Image } from "react-native";
+// Types
 import { Ride } from "@/types/type";
+// Constants
 import { icons } from "@/constants";
+// Utils
 import { formatDate, formatTime } from "@/lib/utils";
 
 const RideCard = ({

@@ -1,14 +1,24 @@
-import { useAuth } from "@clerk/clerk-expo";
-import { useStripe } from "@stripe/stripe-react-native";
-import { router } from "expo-router";
+// React Import
 import React, { useState } from "react";
+// React Native
 import { Alert, Image, Text, View } from "react-native";
+// Clerk for Authentication
+import { useAuth } from "@clerk/clerk-expo";
+// Stripe
+import { useStripe } from "@stripe/stripe-react-native";
+// Expo Router
+import { router } from "expo-router";
+// React Native Modal
 import { ReactNativeModal } from "react-native-modal";
-
+// Custom
 import CustomButton from "@/components/CustomButton";
+// Constants
 import { images } from "@/constants";
+// API
 import { fetchAPI } from "@/lib/fetch";
+// Store
 import { useUserLocationStore } from "@/store";
+// Types
 import { PaymentProps } from "@/types/type";
 
 const Payment = ({
