@@ -48,7 +48,6 @@ const SignIn = () => {
     } finally {
       setLoading(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoaded, form.email, form.password]);
 
   return (

@@ -65,7 +65,6 @@ const Map = () => {
         setDrivers(drivers as MarkerData[]);
       });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [markers, destinationLatitude, destinationLongitude]);
 
   const region = calculateRegion({

@@ -25,7 +25,6 @@ const OAuth = () => {
     } catch (err) {
       console.error("OAuth error", err);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

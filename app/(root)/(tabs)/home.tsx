@@ -66,7 +66,6 @@ const Home = () => {
         address: `${address[0].name}, ${address[0].region}`,
       });
     })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleDestinationPress = (location: {
