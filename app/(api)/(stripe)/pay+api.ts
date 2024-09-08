@@ -11,12 +11,14 @@ export async function POST(request: Request) {
     if (!payment_method_id || !payment_intent_id || !customer_id) {
       return new Response(
         JSON.stringify({ error: "Missing required fields" }),
+        // eslint-disable-next-line prettier/prettier
         { status: 400 }
       );
     }
 
     const paymentMethod = await stripe.paymentMethods.attach(
       payment_method_id,
+      // eslint-disable-next-line prettier/prettier
       { customer: customer_id }
     );
 
@@ -29,6 +31,7 @@ export async function POST(request: Request) {
         success: true,
         message: "Payment successful",
         result: result,
+        // eslint-disable-next-line prettier/prettier
       })
     );
   } catch (error) {

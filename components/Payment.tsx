@@ -55,6 +55,7 @@ const Payment = ({
         confirmHandler: async (
           paymentMethod,
           shouldSavePaymentMethod,
+          // eslint-disable-next-line prettier/prettier
           intentCreationCallback
         ) => {
           const { paymentIntent, customer } = await fetchAPI(
@@ -70,6 +71,7 @@ const Payment = ({
                 amount: amount,
                 paymentMethodId: paymentMethod.id,
               }),
+              // eslint-disable-next-line prettier/prettier
             }
           );
 

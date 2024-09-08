@@ -30,6 +30,7 @@ export async function POST(request: Request) {
 
   const ephemeralKey = await stripe.ephemeralKeys.create(
     { customer: customer.id },
+    // eslint-disable-next-line prettier/prettier
     { apiVersion: "2020-08-27" }
   );
 
@@ -48,6 +49,7 @@ export async function POST(request: Request) {
       paymentIntent: paymentIntent,
       ephemeralKey: ephemeralKey,
       customer: customer.id,
+    // eslint-disable-next-line prettier/prettier
     })
   );
 }
