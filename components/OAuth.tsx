@@ -1,4 +1,4 @@
-import { View, Text, Image, Alert } from "react-native";
+import { View, Text, Image } from "react-native";
 import React, { useCallback } from "react";
 import CustomButton from "./CustomButton";
 import { icons } from "@/constants";
@@ -18,6 +18,7 @@ const OAuth = () => {
     } catch (err) {
       console.error("OAuth error", err);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

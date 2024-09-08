@@ -49,7 +49,7 @@ export async function POST(request: Request) {
       paymentIntent: paymentIntent,
       ephemeralKey: ephemeralKey,
       customer: customer.id,
-    // eslint-disable-next-line prettier/prettier
+      // eslint-disable-next-line prettier/prettier
     })
   );
 }

@@ -2,7 +2,7 @@ import { useUser } from "@clerk/clerk-expo";
 import { useAuth } from "@clerk/clerk-expo";
 import * as Location from "expo-location";
 import { router } from "expo-router";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import {
   Text,
   View,
@@ -32,19 +32,15 @@ const Home = () => {
     router.replace("/(auth)/sign-in");
   };
 
-  const [hasPermission, setHasPermission] = useState<boolean>(false);
-
-  const {
-    data: recentRides,
-    loading,
-    error,
-  } = useFetch<Ride[]>(`/(api)/ride/${user?.id}`);
+  const { data: recentRides, loading } = useFetch<Ride[]>(
+    // eslint-disable-next-line prettier/prettier
+    `/(api)/ride/${user?.id}`
+  );
 
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") {
-        setHasPermission(false);
         return;
       }
 
@@ -61,6 +57,7 @@ const Home = () => {
         address: `${address[0].name}, ${address[0].region}`,
       });
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleDestinationPress = (location: {
