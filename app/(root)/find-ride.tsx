@@ -1,10 +1,16 @@
-import { View, Text } from "react-native";
+// React Import
 import React from "react";
+// React Native
+import { View, Text } from "react-native";
+// Store
 import { useUserLocationStore } from "@/store";
+// Custom Components
 import RideLayout from "@/components/RideLayout";
 import GoogleTextInput from "@/components/GoogleTextInput";
-import { icons } from "@/constants";
 import CustomButton from "@/components/CustomButton";
+// Constants
+import { icons } from "@/constants";
+// Expo Router
 import { router } from "expo-router";
 
 const FindRide = () => {

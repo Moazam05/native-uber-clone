@@ -1,3 +1,4 @@
+// Expo Router
 import { Stack } from "expo-router";
 
 const RootLayout = () => {

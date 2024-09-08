@@ -1,8 +1,13 @@
+// React Import
+import { useEffect } from "react";
+// Clerk for Authentication
 import { useUser } from "@clerk/clerk-expo";
 import { useAuth } from "@clerk/clerk-expo";
+// Expo Location
 import * as Location from "expo-location";
+// Expo Router
 import { router } from "expo-router";
-import { useEffect } from "react";
+// React Native
 import {
   Text,
   View,
@@ -11,14 +16,19 @@ import {
   FlatList,
   ActivityIndicator,
 } from "react-native";
+// SafeAreaView
 import { SafeAreaView } from "react-native-safe-area-context";
-
+// Custom Components
 import GoogleTextInput from "@/components/GoogleTextInput";
 import Map from "@/components/Map";
 import RideCard from "@/components/RideCard";
+// Constants
 import { icons, images } from "@/constants";
+// API
 import { useFetch } from "@/lib/fetch";
+// Store
 import { useUserLocationStore } from "@/store";
+// Types
 import { Ride } from "@/types/type";
 
 const Home = () => {

@@ -1,10 +1,18 @@
-import { ActivityIndicator, FlatList, Image, Text, View } from "react-native";
+// React Import
 import React from "react";
+// React Native
+import { ActivityIndicator, FlatList, Image, Text, View } from "react-native";
+// SafeAreaView
 import { SafeAreaView } from "react-native-safe-area-context";
+// API
 import { useFetch } from "@/lib/fetch";
+// Types
 import { Ride } from "@/types/type";
+// Clerk for Authentication
 import { useUser } from "@clerk/clerk-expo";
+// Custom Components
 import RideCard from "@/components/RideCard";
+// Constants
 import { images } from "@/constants";
 
 const Rides = () => {

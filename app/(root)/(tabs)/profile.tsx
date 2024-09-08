@@ -1,7 +1,10 @@
-import { useUser } from "@clerk/clerk-expo";
+// React Native Import
 import { Image, ScrollView, Text, View } from "react-native";
+// Clerk for Authentication
+import { useUser } from "@clerk/clerk-expo";
+// SafeAreaView
 import { SafeAreaView } from "react-native-safe-area-context";
-
+// Custom Components
 import InputField from "@/components/InputField";
 
 const Profile = () => {

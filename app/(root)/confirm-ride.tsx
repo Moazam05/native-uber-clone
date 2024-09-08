@@ -1,9 +1,14 @@
-import { View, FlatList } from "react-native";
+// React Import
 import React from "react";
+// React Native
+import { View, FlatList } from "react-native";
+// Custom Components
 import RideLayout from "@/components/RideLayout";
 import DriverCard from "@/components/DriverCard";
 import CustomButton from "@/components/CustomButton";
+// Expo Router
 import { router } from "expo-router";
+// Store
 import { useDriverStore } from "@/store";
 
 const ConfirmRide = () => {

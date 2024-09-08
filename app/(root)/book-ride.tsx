@@ -1,11 +1,18 @@
-import { useUser } from "@clerk/clerk-expo";
+// React Native
 import { Image, Platform, Text, View } from "react-native";
+// Clerk for Authentication
+import { useUser } from "@clerk/clerk-expo";
+// Stripe
 import { StripeProvider } from "@stripe/stripe-react-native";
+// Custom Components
 import RideLayout from "@/components/RideLayout";
-import { icons } from "@/constants";
-import { formatTime } from "@/lib/utils";
-import { useDriverStore, useUserLocationStore } from "@/store";
 import Payment from "@/components/Payment";
+// Utils
+import { formatTime } from "@/lib/utils";
+// Constants
+import { icons } from "@/constants";
+// Store
+import { useDriverStore, useUserLocationStore } from "@/store";
 
 const BookRide = () => {
   const { user } = useUser();
