@@ -1,5 +1,5 @@
 import { useUser } from "@clerk/clerk-expo";
-import { Image, Text, View } from "react-native";
+import { Image, Platform, Text, View } from "react-native";
 import { StripeProvider } from "@stripe/stripe-react-native";
 import RideLayout from "@/components/RideLayout";
 import { icons } from "@/constants";
@@ -23,7 +23,10 @@ const BookRide = () => {
       merchantIdentifier="merchant.uber.com"
       urlScheme="myapp"
     >
-      <RideLayout title="Book Ride" snapPoints={["85%", "50%"]}>
+      <RideLayout
+        title="Book Ride"
+        snapPoints={Platform.OS === "ios" ? ["85%", "50%"] : ["100%", "50%"]}
+      >
         <>
           <Text className="text-xl font-JakartaSemiBold mb-3">
             Ride Information
