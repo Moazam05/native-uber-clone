@@ -4,6 +4,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { icons } from "@/constants";
 import Map from "./Map";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
+import { router } from "expo-router";
 
 const RideLayout = ({
   title,
@@ -21,7 +22,7 @@ const RideLayout = ({
       <View className="flex-1 bg-white">
         <View className="flex flex-col h-screen bg-blue-500">
           <View className="flex flex-row absolute z-10 top-16 items-center justify-start px-5">
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => router.back()}>
               <View className="w-10 h-10 bg-white items-center justify-center rounded-full">
                 <Image
                   source={icons.backArrow}
