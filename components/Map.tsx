@@ -1,16 +1,24 @@
+// React Import
 import React, { useEffect, useState } from "react";
+// React Native
 import { ActivityIndicator, Text, View } from "react-native";
+// Native Maps
 import MapView, { Marker, PROVIDER_DEFAULT } from "react-native-maps";
+// Native Maps Direction
 import MapViewDirections from "react-native-maps-directions";
-
+// Constants
 import { icons } from "@/constants";
+// API
 import { useFetch } from "@/lib/fetch";
+// Utils
 import {
   calculateDriverTimes,
   calculateRegion,
   generateMarkersFromData,
 } from "@/lib/map";
+// Store
 import { useDriverStore, useUserLocationStore } from "@/store";
+// Types
 import { Driver, MarkerData } from "@/types/type";
 
 const directionsAPI = process.env.EXPO_PUBLIC_PLACES_API_KEY;

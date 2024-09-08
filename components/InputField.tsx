@@ -1,3 +1,6 @@
+// React Import
+import React, { useState } from "react";
+// React Native
 import {
   View,
   Text,
@@ -9,8 +12,9 @@ import {
   Keyboard,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
+// Types
 import { InputFieldProps } from "@/types/type";
+// Constants
 import { icons } from "@/constants";
 
 const InputField = ({

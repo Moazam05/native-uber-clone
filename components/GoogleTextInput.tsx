@@ -1,7 +1,10 @@
+// React Native Import
 import { View, Image } from "react-native";
+// React Native Google Places Autocomplete
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
-
+// Constants
 import { icons } from "@/constants";
+// Types
 import { GoogleInputProps } from "@/types/type";
 
 const googlePlacesApiKey = process.env.EXPO_PUBLIC_PLACES_API_KEY;
