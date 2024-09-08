@@ -45,7 +45,7 @@ const Rides = () => {
         ListHeaderComponent={
           <>
             <Text className="text-xl font-JakartaBold mt-5 mb-3">
-              Recent Rides
+              All Rides
             </Text>
           </>
         }
